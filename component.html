@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>vue</title>
+
+
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <script src="js/jquery.min.js"></script>
+    <script src="js/popper.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+
+
+</head>
+<body>
+<nav class="navbar navbar-expand-sm bg-primary navbar-dark">
+    <!-- Brand -->
+    <a class="navbar-brand" href="#">XLSX</a>
+
+    <!-- Links -->
+    <ul class="navbar-nav">
+        <li class="nav-item">
+            <a class="nav-link" href="show.php">show</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="read.php">add</a>
+        </li>
+
+
+    </ul>
+</nav>
+<div id="test3">{{name}}
+
+    <div class="row">
+        <private-app-article v-for="article in articles" :article="article"></private-app-article>
+    </div>
+
+
+</div>
+
+<div>
+</div>
+<script src="js/vue.js"></script>
+
+<script>
+    var PrivateAppArtical = {
+        data: function () {
+            return {
+                count: 0
+            }
+        },
+        template: '<div class="col-md-4"><div class="card" style="width:400px">\n' +
+            '  <img class="card-img-top" :src="article.img" alt="Card image">\n' +
+            '    <div class="card-header">{{article.img}}</div>\n' +
+            '  <div class="card-body">\n' +
+            '    <h4 class="card-title">{{article.title}}</h4>\n' +
+            '    <p class="card-text">{{article.data}}</p>\n' +
+            '    <a href="#" class="btn btn-primary">See Profile</a>\n' +
+            '  </div>\n' +
+            '</div></div>'
+        , props: ['article']
+
+    };
+    Vue.component('global-app-article', {
+        data: function () {
+            return {
+                count: 0
+            }
+        },
+        template: '<div class="col-md-4"><div class="card" style="width:400px">\n' +
+            '  <img class="card-img-top" :src="article.img" alt="Card image">\n' +
+            '    <div class="card-header">{{article.img}}</div>\n' +
+            '  <div class="card-body">\n' +
+            '    <h4 class="card-title">{{article.title}}</h4>\n' +
+            '    <p class="card-text">{{article.data}}</p>\n' +
+            '    <a href="#" class="btn btn-primary">See Profile</a>\n' +
+            '  </div>\n' +
+            '</div></div>'
+        , props: ['article']
+
+    });
+    var app = new Vue({
+        el: '#test3',
+        data: {
+            name: "osama",
+            articles: [
+                {title: 'title 1', img: 'img/1.jpg', data: 'assssssssssssssssssssssss1'},
+                {title: 'title 2', img: 'img/2.jpg', data: 'assssssssssssssssssssssss2'},
+                {title: 'title 3', img: 'img/3.jpeg', data: 'assssssssssssssssssssssss3'},
+                {title: 'title 4', img: 'img/4.png', data: 'assssssssssssssssssssssss4'},
+                {title: 'title 5', img: 'img/1.jpg', data: 'assssssssssssssssssssssss5'},
+            ]
+        },
+        components: {'private-app-article': PrivateAppArtical}
+    })
+</script>
+
+
+</body>
+</html>

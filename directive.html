@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>vue</title>
+
+
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <script src="js/jquery.min.js"></script>
+    <script src="js/popper.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+
+
+</head>
+<body>
+<nav class="navbar navbar-expand-sm bg-primary navbar-dark">
+    <!-- Brand -->
+    <a class="navbar-brand" href="#">XLSX</a>
+
+    <!-- Links -->
+    <ul class="navbar-nav">
+        <li class="nav-item">
+            <a class="nav-link" href="show.php">show</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="read.php">add</a>
+        </li>
+
+
+    </ul>
+</nav>
+
+
+<div id="test3" class="text-center">
+    <h1> {{counter}}</h1>
+    <a href="www" @click.prevent="counter++" class="btn btn-dark"> click</a>
+</div>
+<br>
+<div class="row">
+
+    <form class="col-md-6 offset-2" id="test4">
+        <div class="input-group mb-3">
+            <div class="input-group-prepend">
+                <span class="input-group-text">@</span>
+            </div>
+            <input type="text" v-model="name" class="form-control" placeholder="Username">
+        </div>
+
+        <div class="form-check-inline">
+            <label class="form-check-label">
+                <input type="checkbox" class="form-check-input" v-model="checkElement" value="html">html
+            </label>
+        </div>
+        <div class="form-check-inline">
+            <label class="form-check-label">
+                <input type="checkbox" class="form-check-input" v-model="checkElement" value="css">css
+            </label>
+        </div>
+
+        <div class="form-check-inline">
+            <label class="form-check-label">
+                <input type="checkbox" class="form-check-input" v-model="checkElement" value="js">js
+            </label>
+        </div>
+        <div class="form-check-inline">
+            <label class="form-check-label">
+                <input type="checkbox" class="form-check-input" v-model="checkElement" value="php">php
+            </label>
+        </div>
+
+
+        <div class="form-group">
+            <label for="sel1">Select list:</label>
+            <select class="form-control" id="sel1" v-model="selected">
+                <option>1</option>
+                <option>2</option>
+                <option>3</option>
+                <option>4</option>
+            </select>
+        </div>
+        <div class="form-check-inline">
+            <label class="form-check-label">
+                <input type="radio" class="form-check-input"  v-model="radio"  value="male" checked name="gender">male
+            </label>
+        </div>
+        <div class="form-check-inline">
+            <label class="form-check-label">
+                <input type="radio" class="form-check-input" v-model="radio" value="female" name="gender" >female
+            </label>
+        </div>
+
+
+        <div class="input-group mb-3">
+
+            <textarea v-model="text" cols="70" rows="6"> </textarea>
+        </div>
+
+
+        <h3> user name :<span style="color: #80bdff"> {{name}}</span></h3>
+        <h3> check element is :<span style="color: #80bdff"> {{checkElement}}</span></h3>
+        <h3> radio is :<span style="color: #80bdff"> {{radio}}</span></h3>
+        <h3> selected :<span style="color: #80bdff"> {{selected}}</span></h3>
+        <div> text area:<span style="color: #80bdff"> {{ text}}</span></div>
+
+    </form>
+    <br>
+
+
+</div>
+
+<div id="test1">
+    <p v-text="name"></p>
+    <p v-html="title"></p>
+    <p v-if="age">{{age}}</p>
+    <p v-else="age"> you not assign age</p>
+    <p v-show="gender">{{gender}}</p>
+    <img :src="img" class="img-thumbnail" width="300">
+</div>
+
+
+<div id="test2">
+    <ul>
+        <li v-for="course in courses">{{course}}</li>
+    </ul>
+    <hr>
+    results
+    <hr>
+    <ul>
+        <li v-for="result in coursResults"> {{result.name}} ---> {{result.grade}}</li>
+    </ul>
+
+    <table class="table table-info">
+        <thead>
+        <th>#</th>
+        <th>course</th>
+        <th>result</th>
+        </thead>
+        <tbody>
+        <tr v-for="(result,key) in coursResults">
+            <td>{{key+1}}</td>
+            <td>{{result.name}}</td>
+            <td>{{result.grade}}</td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+
+
+<script src="js/vue.js"></script>
+
+<script>
+
+    app = new Vue({
+        el: '#test1',
+        data: {
+            title: '<b> append Html </b>',
+            name: '  append txt ',
+            age: '',
+            gender: '',
+            img: 'img/1.jpg',
+        }
+    });
+    app = new Vue({
+        el: '#test3',
+        data: {
+            counter: 1,
+            name: ''
+        }
+    });
+    app = new Vue({
+        el: '#test4',
+        data: {
+            name: 'osama',
+            text: '',
+            checkElement: [],
+            radio: '',
+            selected: ''
+        }
+    });
+    app2 = new Vue({
+        el: '#test2',
+        data: {
+            courses: ['html', 'css', 'js', 'php'],
+            coursResults: [
+                {
+                    name: 'html',
+                    grade: '60'
+                },
+                {
+                    name: 'css',
+                    grade: '80'
+                },
+                {
+                    name: 'js',
+                    grade: '70'
+                },
+            ]
+
+        }
+    });
+</script>
+
+
+</body>
+</html>
