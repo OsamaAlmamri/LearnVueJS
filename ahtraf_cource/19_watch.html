@@ -10,7 +10,13 @@
     <script src="../js/popper.min.js"></script>
     <script src="../js/bootstrap.min.js"></script>
 
-
+<style>
+    .post_liked
+    {
+        color: blue;
+        font-weight: bold;
+    }
+</style>
 </head>
 <body>
 <nav class="navbar navbar-expand-sm bg-primary navbar-dark">
@@ -29,24 +35,11 @@
 
     </ul>
 </nav>
-
+watch  لمراقبة تفير احد العناصر الموجودة في المتغيرات ويكون اسمة بنفس اسم المتغير و الدالة تستقبل بارامتر يمثل قيمة المتغير الذي انا اراقبة
 <div id="app">
 
-<!--<input type="text" v-on:keyup="custom_method($event)">-->
-    to_fire_event_when keyup on spesific leter or key like "enter"
-    <br/>
-    مثلا في تطبيق المراسلة اذا ضغط على enter  نعمل ارسال للرسالة ):
-    <br/>
-<input type="text" v-on:keyup.enter="custom_method($event)">
-    <br/>
-click enter+ctrl
+    <p @click="liked=!liked" v-bind:class="className"> liked {{like}}</p>
 
-<input type="text" v-on:keyup.ctrl.enter="custom_method($event)">
-    <br/>
-    click window+enter
-
-    <input type="text" v-on:keyup.meta.enter="custom_method($event)">
-    meta==window log
 </div>
 
 <script src="../js/vue.js"></script>
@@ -55,14 +48,27 @@ click enter+ctrl
 
     var app = new Vue({
         el: '#app',
-        methods: {
-            custom_method: function (event) {
-                console.log(event);
+        data: {
+          liked:false,
+            like:4
+        },
+        computed: {
+            className: function () {
+                return (this.liked==false)?'':'post_liked';
+            }
+        },
+        watch:{
+            liked:function (value) {
+                if(value==true)
+                    this.like++;
+                else
+                    this.like--;
 
             }
         }
     })
 </script>
+
 
 
 </body>

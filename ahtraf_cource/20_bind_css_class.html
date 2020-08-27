@@ -10,7 +10,15 @@
     <script src="../js/popper.min.js"></script>
     <script src="../js/bootstrap.min.js"></script>
 
+    <style>
+        .red {
+            background: red;
+        }
 
+        .blue {
+            background: #005cbf;
+        }
+    </style>
 </head>
 <body>
 <nav class="navbar navbar-expand-sm bg-primary navbar-dark">
@@ -29,24 +37,15 @@
 
     </ul>
 </nav>
-
 <div id="app">
+<!--<div style="width: 200px; height: 200px"  :class="{blue:true,red:false}"></div>-->
+<!--<div style="width: 200px; height: 200px"  :class="{blue:active,red:!active}"></div>-->
+<!--<div style="width: 200px; height: 200px"  :class="objectClass"></div>-->
+<!--    لدمج العديد من الكلاسات بواسطة مصفوفة -->
+<div style="width: 200px; height: 200px"  :class="[objectClass,'red',{blue:active,red:!active}]"></div>
 
-<!--<input type="text" v-on:keyup="custom_method($event)">-->
-    to_fire_event_when keyup on spesific leter or key like "enter"
-    <br/>
-    مثلا في تطبيق المراسلة اذا ضغط على enter  نعمل ارسال للرسالة ):
-    <br/>
-<input type="text" v-on:keyup.enter="custom_method($event)">
-    <br/>
-click enter+ctrl
+    <button @click="active=!active" > toggel</button>
 
-<input type="text" v-on:keyup.ctrl.enter="custom_method($event)">
-    <br/>
-    click window+enter
-
-    <input type="text" v-on:keyup.meta.enter="custom_method($event)">
-    meta==window log
 </div>
 
 <script src="../js/vue.js"></script>
@@ -55,10 +54,12 @@ click enter+ctrl
 
     var app = new Vue({
         el: '#app',
-        methods: {
-            custom_method: function (event) {
-                console.log(event);
-
+        data: {
+            active: false,
+        },
+        computed:{
+            objectClass:function () {
+             return    {blue:this.active,red:!this.active} ;
             }
         }
     })

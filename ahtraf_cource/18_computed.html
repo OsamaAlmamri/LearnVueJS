@@ -31,22 +31,9 @@
 </nav>
 
 <div id="app">
+{{full_name}}
 
-<!--<input type="text" v-on:keyup="custom_method($event)">-->
-    to_fire_event_when keyup on spesific leter or key like "enter"
-    <br/>
-    مثلا في تطبيق المراسلة اذا ضغط على enter  نعمل ارسال للرسالة ):
-    <br/>
-<input type="text" v-on:keyup.enter="custom_method($event)">
-    <br/>
-click enter+ctrl
-
-<input type="text" v-on:keyup.ctrl.enter="custom_method($event)">
-    <br/>
-    click window+enter
-
-    <input type="text" v-on:keyup.meta.enter="custom_method($event)">
-    meta==window log
+    <input type="text" v-model="first_name">
 </div>
 
 <script src="../js/vue.js"></script>
@@ -55,10 +42,13 @@ click enter+ctrl
 
     var app = new Vue({
         el: '#app',
-        methods: {
-            custom_method: function (event) {
-                console.log(event);
-
+        data: {
+            first_name:"Osama",
+            last_name:"ALmamri",
+        },
+        computed: {
+            full_name: function () {
+                return this.first_name + " " + this.last_name ;
             }
         }
     })
