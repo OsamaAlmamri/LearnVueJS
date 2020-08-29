@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>vue</title>
+
+
+    <link rel="stylesheet" href="../css/bootstrap.min.css">
+    <script src="../js/jquery.min.js"></script>
+    <script src="../js/popper.min.js"></script>
+    <script src="../js/bootstrap.min.js"></script>
+
+    <style>
+        .red {
+            background: red;
+        }
+
+        .blue {
+            background: #005cbf;
+        }
+    </style>
+</head>
+<body>
+<nav class="navbar navbar-expand-sm bg-primary navbar-dark">
+    <!-- Brand -->
+    <a class="navbar-brand" href="#">XLSX</a>
+
+    <!-- Links -->
+    <ul class="navbar-nav">
+        <li class="nav-item">
+            <a class="nav-link" href="show.php">show</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="read.php">add</a>
+        </li>
+
+
+    </ul>
+</nav>
+<div id="app">
+    <!--<div style="width: 200px; height: 200px"  :class="{blue:true,red:false}"></div>-->
+    <!--<div style="width: 200px; height: 200px"  :class="{blue:active,red:!active}"></div>-->
+    <!--<div style="width: 200px; height: 200px"  :class="objectClass"></div>-->
+    <!--    لدمج العديد من الكلاسات بواسطة مصفوفة -->
+
+    <p v-show="active"> button is active</p>
+    الفرق بين if ,show ان يضيف خاصيت style=display:none
+
+    <button @click="active=!active"> toggel</button>
+
+</div>
+
+<script src="../js/vue.js"></script>
+
+<script>
+
+    var app = new Vue({
+        el: '#app',
+        data: {
+            active: false,
+        }
+    })
+</script>
+
+
+</body>
+</html>
