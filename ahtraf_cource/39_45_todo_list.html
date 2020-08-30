@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>vue</title>
+    <link href="https://unpkg.com/todomvc-app-css@2.1.0/index.css" rel="stylesheet"/>
+
+</head>
+<body>
+<section class="todoapp">
+    <header class="header">
+        <h1>todos</h1>
+        <input class="new-todo"
+               v-model="new_todo"
+               @keyup.enter="add_todo"
+               autocomplete="off"
+               placeholder="What needs to be done?">
+    </header>
+    <section class="main">
+        <input class="toggle-all" id="toggle-all" v-model="allDone" type="checkbox">
+        <label for="toggle-all">Mark all as complete</label>
+        <ul class="todo-list">
+            <li class="todo" v-for="todo in filterTodos"
+                :class="{completed:todo.is_completed ,editing:editingTodo==todo}"
+                @dblclick="edit_todo(todo)"
+            >
+                <div class="view">
+                    <input class="toggle" v-model="todo.is_completed" type="checkbox">
+                    <label>{{todo.title}}</label>
+                    <button class="destroy" @click="delete_todo(todo)"></button>
+                </div>
+                <input class="edit" v-model="todo.title" type="text"
+                       @keyup.esc="CancelEdit"
+                       @keyup.enter="endEdit">
+            </li>
+        </ul>
+    </section>
+    <footer class="footer">
+    <span class="todo-count">
+      <strong>{{remaing_todo}}</strong> {{remaing_todo_text}} left
+    </span>
+        <ul class="filters">
+            <li><a href="#/all" @click.prevent="visibility='all'" :class="{selected:(visibility=='all')}">All</a></li>
+            <li><a href="#/active" @click.prevent="visibility='active'" :class="{selected:(visibility=='active')}">Active</a>
+            </li>
+            <li><a href="#/completed" @click.prevent="visibility='completed'"
+                   :class="{selected:(visibility=='completed')}">Completed</a></li>
+        </ul>
+        <button class="clear-completed" @click="clear_completed">
+            Clear completed
+        </button>
+    </footer>
+</section>
+<footer class="info">
+    <p>Double-click to edit a todo</p>
+</footer>
+
+
+<script src="../js/vue.js"></script>
+<script>
+    var filters = {
+        'all': function (todos) {
+            return todos;
+        },
+        'active': function (todos) {
+            return todos.filter(function (todo) {
+                return !todo.is_completed;
+
+            });
+        },
+        'completed': function (todos) {
+            return todos.filter(function (todo) {
+                return todo.is_completed;
+            });
+        }
+    };
+    var app = new Vue({
+        el: '.todoapp',
+        data: {
+            new_todo: '',
+            editingTodo: '',
+            visibility: 'all',
+            oldEditingTitle: '',
+            todos: [
+                {title: 'test 1', is_completed: false},
+                {title: 'test 2', is_completed: true}
+            ]
+        }, computed: {
+            filterTodos: function () {
+                return filters[this.visibility](this.todos);
+            },
+            remaing_todo: function () {
+                return filters.active(this.todos).length;
+            },
+            remaing_todo_text: function () {
+                return (filters.active(this.todos).length > 1) ? 'items' : 'item';
+            },
+            allDone: {
+                get: function () {
+                    return this.remaing_todo === 0;
+                },
+                set: function (value) {
+                    this.todos.forEach(function (todo) {
+                        todo.is_completed = value;
+                    });
+                }
+            }
+        },
+        methods: {
+            edit_todo: function (todo) {
+                this.editingTodo = todo;
+                this.oldEditingTitle = todo.title;
+
+            },
+            endEdit (todo) {
+                // delete editingTodo if title is null or set of space liters like '            '
+                if (!this.editingTodo.title.trim())
+                    this.delete_todo(this.editingTodo)
+                this.editingTodo = null;
+            },
+            CancelEdit() {
+                this.editingTodo.title = this.oldEditingTitle;
+                this.editingTodo = null;
+            },
+            delete_todo (todo) {
+                this.todos.splice(this.todos.indexOf(todo), 1);
+
+            },
+            clear_completed () {
+                this.todos = filters.active(this.todos);
+
+            },
+            add_todo () {
+                var value = this.new_todo && this.new_todo.trim();
+                if (!value) {
+                    return;
+                }
+                this.todos.push({title: this.new_todo, is_completed: false});
+                this.new_todo = '';
+            }
+        }
+    })
+</script>
+</body>
+</html>
+
