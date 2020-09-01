@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>vue</title>
+
+
+    <link rel="stylesheet" href="../css/bootstrap.min.css">
+    <script src="../js/jquery.min.js"></script>
+    <script src="../js/popper.min.js"></script>
+    <script src="../js/bootstrap.min.js"></script>
+    <style>
+        .error {
+            border: red solid 1px;
+        }
+    </style>
+    <link rel="stylesheet" href="../font-awesome/css/font-awesome.min.css">
+
+
+</head>
+<body>
+<nav class="navbar navbar-expand-sm bg-primary navbar-dark">
+    <!-- Brand -->
+    <a class="navbar-brand" href="#">XLSX</a>
+
+    <!-- Links -->
+    <ul class="navbar-nav">
+        <li class="nav-item">
+            <a class="nav-link" href="show.php">show</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="read.php">add</a>
+        </li>
+
+
+    </ul>
+</nav>
+<style>
+    span {
+        margin: 3px;
+    }
+</style>
+<section id="app" class="container">
+
+    <button @click="activeComponent='first-component'">  first-component</button>
+    <button @click="activeComponent='second-component'">  second-component</button>
+    <hr>
+    <keep-alive>
+        <component :is="activeComponent"></component>
+
+    </keep-alive>
+
+</section>
+<script src="../js/vue.js"></script>
+
+<script>
+Vue.component('first-component',{
+    'template':"<div> this is the first component <button @click='count++'>{{count}}</button></div>",
+    data:function () {
+        return {
+            count:0,
+        }
+    }
+});
+Vue.component('second-component',{
+    'template':"<div> this is the second component <button @click='count++'>{{count}}</button></div>",
+    data:function () {
+        return {
+            count:0,
+        }
+    }
+});
+    var app = new Vue({
+        el: '#app',
+
+        data: {
+            activeComponent:'first-component'
+        }
+    })
+</script>
+</body>
+</html>
