@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <name>vue</name>
+
+
+    <link rel="stylesheet" href="../css/bootstrap.min.css">
+    <script src="../js/jquery.min.js"></script>
+    <script src="../js/popper.min.js"></script>
+    <script src="../js/bootstrap.min.js"></script>
+    <style>
+        .error {
+            border: red solid 1px;
+        }
+    </style>
+    <link rel="stylesheet" href="../font-awesome/css/font-awesome.min.css">
+
+
+</head>
+<body>
+<nav class="navbar navbar-expand-sm bg-primary navbar-dark">
+    <!-- Brand -->
+    <a class="navbar-brand" href="#">XLSX</a>
+
+    <!-- Links -->
+    <ul class="navbar-nav">
+        <li class="nav-item">
+            <a class="nav-link" href="show.php">show</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="read.php">add</a>
+        </li>
+
+
+    </ul>
+</nav>
+<style>
+    span {
+        margin: 3px;
+    }
+</style>
+<section id="app" class="container">
+    <div class="row">
+        <product v-for="product in products" :price="product.price"  :name="product.name" :data="product.data" :img="product.img"></product>
+    </div>
+</section>
+<script src="../js/vue.js"></script>
+
+    <script>
+    Vue.component('product', {
+        template: '<div class="col-md-4"><div class="card" style="width:400px">\n' +
+            '  <img class="card-img-top img-thumbnail" style="max-height: 600px" :src="img" alt="Card image">\n' +
+            '    <div class="card-header"> price {{price}}</div>\n' +
+            '  <div class="card-body">\n' +
+            '    <h4 class="card-name">{{name}}</h4>\n' +
+            '    <p class="card-text">{{data}}</p>\n' +
+            '    <a href="#" class="btn btn-primary">See Profile</a>\n' +
+            '  </div>\n' +
+            '</div></div>',
+        props: {
+            name:{required:true},
+            img:{default:'../img/1.jpg' ,type:String},
+            price:{type:Number,validator:function(value){
+                  return   value>=0;
+                }},
+            data:{type:[Number,String]}
+        }
+    });
+    var app = new Vue({
+        el: '#app',
+        data: {
+            products:
+                [
+                    {name: 'name 1',price:10, img: '../img/1.jpg', data: 'assssssssssssssssssssssss1'},
+                    {name: 'name 2',price:120, img: '../img/2.jpg', data: 'assssssssssssssssssssssss2'},
+                    {name: 'name 3', price:10,img: '../img/3.jpeg', data: 'assssssssssssssssssssssss3'},
+                    {name: 'name 4', price:1078,img: '../img/4.png', data: 'assssssssssssssssssssssss4'},
+                    {name: 'name 5', price:1000,img: '../img/1.jpg', data: 'assssssssssssssssssssssss5'},
+                ]
+        }
+    })
+    </script>
+</body>
+</html>

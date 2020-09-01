@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>vue</title>
+
+
+    <link rel="stylesheet" href="../css/bootstrap.min.css">
+    <script src="../js/jquery.min.js"></script>
+    <script src="../js/popper.min.js"></script>
+    <script src="../js/bootstrap.min.js"></script>
+    <style>
+        .error {
+            border: red solid 1px;
+        }
+    </style>
+    <link rel="stylesheet" href="../font-awesome/css/font-awesome.min.css">
+
+
+</head>
+<body>
+<nav class="navbar navbar-expand-sm bg-primary navbar-dark">
+    <!-- Brand -->
+    <a class="navbar-brand" href="#">XLSX</a>
+
+    <!-- Links -->
+    <ul class="navbar-nav">
+        <li class="nav-item">
+            <a class="nav-link" href="show.php">show</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="read.php">add</a>
+        </li>
+
+
+    </ul>
+</nav>
+<style>
+    span {
+        margin: 3px;
+    }
+</style>
+<section id="app" class="container">
+<test-slot></test-slot>
+    <hr>
+    <test-slot> now i set tag with some  <h1>html data  </h1></test-slot>
+
+</section>
+<script src="../js/vue.js"></script>
+
+    <script>
+        Vue.component('test-slot',{
+            template:'<div> test <slot> this is deafult value if i want to show if component tag is empty</slot> </div>'
+        })
+
+    var app = new Vue({
+        el: '#app',
+        data: {
+
+        }
+    })
+    </script>
+</body>
+</html>
