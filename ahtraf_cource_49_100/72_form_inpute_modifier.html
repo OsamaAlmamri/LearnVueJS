@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>vue</title>
+
+
+    <link rel="stylesheet" href="../css/bootstrap.min.css">
+    <script src="../js/jquery.min.../js"></script>
+    <script src="../js/popper.min.../js"></script>
+    <script src="../js/bootstrap.min.js"></script>
+
+
+</head>
+<body>
+<section class="container">
+    <nav class="navbar navbar-expand-sm bg-primary navbar-dark">
+        <!-- Brand -->
+        <a class="navbar-brand" href="#">XLSX</a>
+
+        <!-- Links -->
+        <ul class="navbar-nav">
+            <li class="nav-item">
+                <a class="nav-link" href="show.php">show</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="read.php">add</a>
+            </li>
+
+
+        </ul>
+    </nav>
+
+
+    <br>
+
+    <div id="test1">
+        <div>
+            <h1>lazy modifire </h1> لا يتم التاثير الا بعد الخروج من مربع النص
+            <input type="text" v-model.lazy="name">
+            <p v-text="name"></p>
+            <br>
+        </div>
+
+        <div>
+            <h1>number modifire </h1> يحعل القيمة داخل المتغير رقمية وليس نصية  داخل ""
+            <input type="number" v-model.number="num">
+            <p v-text="name"></p>
+            <br>
+        </div>
+
+        <div>
+            <h1>trim modifire </h1>يقوم بحذف الفراغات من بداية وناية النص
+            <input type="text" v-model.trim="test_trim">
+            <p v-text="test_trim"></p>
+            <br>
+        </div>
+
+    </div>
+
+
+</section>
+
+<script src="../js/vue.js"></script>
+
+<script>
+
+    app = new Vue({
+        el: '#test1',
+        data: {
+            name: '  append txt ',
+            test_trim: '',
+            num: 0,
+        }
+    });
+</script>
+
+
+</body>
+</html>
